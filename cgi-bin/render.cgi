@@ -31,8 +31,11 @@ rst_file = open(OP.join(base_dir,filename))
 
 parts = publish_parts(rst_file.read(),writer_name='html')
 
-parts['footer'] = "<div class=\"footer\">Source: <a href=\"%s\">%s</a>"  % (OP.join(base_dir,filename),filename)
+parts['footer'] = "<div class=\"footer\">Source: <a href=\"%s\">%s</a></div>"  % (OP.join(base_dir,filename),filename)
 
-for part in ['head_prefix','html_head','stylesheet','html_body','footer','body_suffix']:
-	print(parts[part])
+for part in ['head_prefix','html_head','stylesheet','body_prefix','html_title','fragment','footer','body_suffix']:
+	if part == 'html_head':
+		print(parts[part] % "utf-8")
+	else:
+		print(parts[part])
 
