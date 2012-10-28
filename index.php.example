@@ -1,0 +1,5 @@
+<?php
+
+header("Location: http://blog.example.com/cgi-bin/render.cgi");
+
+?>
