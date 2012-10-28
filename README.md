@@ -17,3 +17,9 @@ Requires
 ---------
 
 * docutils -- http://docutils.sourceforge.net
+
+License
+-------
+
+This software is available under the GNU General Public License. See COPYING for details.
+
