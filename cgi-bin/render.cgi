@@ -75,7 +75,8 @@ for part in ['head_prefix','html_head','stylesheet','body_prefix','html_title','
 	if part == 'html_head':
 		print(parts[part] % "utf-8")
 	elif part == 'stylesheet':
-		print("<LINK REL=StyleSheet HREF=\"%s\" TYPE=\"text/css\"/>\n" % OP.join(base_dir,"my.css"))
+		if local_settings.stylesheet:
+			print("<LINK REL=StyleSheet HREF=\"%s\" TYPE=\"text/css\"/>\n" % local_settings.stylesheet)
 		print(parts[part])
 	else:
 		print(parts[part])
