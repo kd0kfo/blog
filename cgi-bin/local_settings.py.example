@@ -9,3 +9,4 @@ urls[0] = "index.rst"
 urls[1] = "category/blog_entry.rst"
 
 stylesheet = "http://blog.example.com/my.css"
+footer = "<p>Copyright 2012 AUTHOR</p>"

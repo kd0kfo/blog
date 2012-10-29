@@ -40,13 +40,11 @@ if id != None:
 	filename = local_settings.urls[id]
 	rst_file = open(OP.join(base_dir,filename),"r")
 	parts = publish_parts(rst_file.read(),writer_name='html')
-	parts['footer'] = "<div class=\"footer\"><p>Source: <a href=\"%s\">%s</a>  "  % (OP.join(base_dir,filename),filename)
+	parts['footer'] = "<p>Source: <a href=\"%s\">%s</a>  "  % (OP.join(base_dir,filename),filename)
 	the_category = local_settings.filename2category(filename)
 	if the_category:
 		parts['footer'] += "Category: <a href=\"render.cgi?cat=%s\">%s</a> " % (the_category,the_category)
 	
-	parts['footer'] += "</div>\n"
-
 if category or id == None:
 	if id == 0 and local_settings.urls:
 		parts = publish_parts(open(OP.join(base_dir,local_settings.urls[id]),"r"),writer_name="html")
@@ -78,6 +76,16 @@ for part in ['head_prefix','html_head','stylesheet','body_prefix','html_title','
 		if local_settings.stylesheet:
 			print("<LINK REL=StyleSheet HREF=\"%s\" TYPE=\"text/css\"/>\n" % local_settings.stylesheet)
 		print(parts[part])
+	elif part == 'footer':
+		import os, time
+		print("<div class=\"footer\">")
+		print(parts['footer'])
+		if local_settings.footer:
+			print(local_settings.footer)
+		if filename:
+					(mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(OP.join(base_dir,filename))
+					print("last modified: %s %s" % (time.ctime(mtime),time.tzname[0]))
+		print("</div>\n")
 	else:
 		print(parts[part])
 
