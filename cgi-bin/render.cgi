@@ -34,6 +34,7 @@ from docutils.core import publish_parts
 
 import os.path  as OP
 base_dir = ".."
+filename = ""
 
 # TODO Sort for unique category_str values. Then display only those.
 if id != None:
