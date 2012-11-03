@@ -37,7 +37,7 @@ def render_rst(id = None, category = None):
 			parts = publish_parts(rst_file.read(),writer_name='html')
 		else:
 			parts = publish_parts("File Not Found",writer_name='html')
-		parts['footer'] = "<p>Source: <a href=\"%s\">%s</a>  "  % (OP.join(base_dir,filename),filename)
+		parts['footer'] = "<p>Source: <a href=\"%s\">%s</a></p>\n"  % (OP.join(base_dir,filename),filename)
 		the_category = util.filename2category(filename)
 		if the_category:
 			parts['footer'] += "Category: <a href=\"render.cgi?cat=%s\">%s</a> " % (the_category,the_category)
@@ -66,7 +66,7 @@ def render_rst(id = None, category = None):
 			print(parts[part] % "utf-8")
 		elif part == 'stylesheet':
 			if local_settings.stylesheet:
-				print("<LINK REL=StyleSheet HREF=\"%s\" TYPE=\"text/css\"/>\n" % local_settings.stylesheet)
+				print("<link rel=\"stylesheet\" href=\"%s\" type=\"text/css\"/>\n" % local_settings.stylesheet)
 			print(parts[part])
 		elif part == 'footer':
 			import os, time
