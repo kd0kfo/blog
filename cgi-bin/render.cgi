@@ -26,7 +26,7 @@ def render_rst(id = None, category = None):
 	from docutils.core import publish_parts
 
 	import os.path  as OP
-	base_dir = ".."
+	base_dir = local_settings.base_dir
 	filename = ""
 
 	# TODO Sort for unique category_str values. Then display only those.
