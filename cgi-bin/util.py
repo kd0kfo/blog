@@ -5,11 +5,11 @@ def filename2category(filename):
 
 def extract_categories(urls):
     categories = {}
-    for id in urls.keys():
-        key = urls[id]
+    for entry_id in urls.keys():
+        key = urls[entry_id]
         category_str = filename2category(key)
         if not category_str in categories:
-            categories[category_str] = [(key,id)]
+            categories[category_str] = [(key,entry_id)]
         else:
-            categories[category_str].append((key,id))
+            categories[category_str].append((key,entry_id))
     return categories
