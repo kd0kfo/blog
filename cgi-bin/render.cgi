@@ -10,7 +10,7 @@ def render_rst(entry_id = None, category = None):
 	categories = util.extract_categories(local_settings.urls)
 
 	print('Content-type: text/html\n')
-	if entry_id:
+	if entry_id != None:
 		if not entry_id.isdigit():
 			entry_id = "0"
 		entry_id = int(entry_id)
