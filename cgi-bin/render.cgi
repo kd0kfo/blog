@@ -74,7 +74,7 @@ def render_rst(id = None, category = None):
 					basefilename = basefilename[basefilename.rfind("/")+1:]
 				if len(basefilename) >= 4 and basefilename[-4:] == ".rst":
 					basefilename = basefilename[:-4]
-				parts['fragment'] += "<li><a href=\"render.cgi?id=%s\">%s</a></li>\n" % (entry[1],basefilename)
+				parts['fragment'] += "<li><a href=\"/cgi-bin/render.cgi?id=%s\">%s</a></li>\n" % (entry[1],basefilename)
 			parts['fragment'] += "</ul>\n"
 
 	for part in ['head_prefix','html_head','stylesheet','body_prefix','html_title','fragment','footer','body_suffix']:
