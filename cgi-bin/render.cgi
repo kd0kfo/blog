@@ -3,16 +3,16 @@
 def lookup_val(val):
 	from local_settings import urls
 
-	for id in urls:
-		url = urls[id]
+	for entry_id in urls:
+		url = urls[entry_id]
 		unique_name = url.split(".")[0]
 		if unique_name == val:
-			return id
+			return entry_id
 
 	return None
 
 
-def render_rst(id = None, category = None):
+def render_rst(entry_id = None, category = None):
 
 	# Local Settings needs to be written to provide
 	# URL listings. See README for details
@@ -22,16 +22,16 @@ def render_rst(id = None, category = None):
 	categories = util.extract_categories(local_settings.urls)
 
 	print('Content-type: text/html\n')
-	if id:
-		if not id.isdigit():
-			id_from_val = lookup_val(id)
+	if entry_id != None:
+		if not entry_id.isdigit():
+			id_from_val = lookup_val(entry_id)
 			if id_from_val is not None:
-				id = id_from_val
+				entry_id = id_from_val
 			else:
-				id = "0"
-		id = int(id)
-		if id > len(local_settings.urls):
-			id = None
+				entry_id = "0"
+		entry_id = int(entry_id)
+		if entry_id > len(local_settings.urls):
+			entry_id = None
 
 	import locale
 	try:
@@ -46,8 +46,8 @@ def render_rst(id = None, category = None):
 	filename = ""
 
 	# TODO Sort for unique category_str values. Then display only those.
-	if id != None:
-		filename = local_settings.urls[id]
+	if entry_id != None:
+		filename = local_settings.urls[entry_id]
 		if OP.isfile(OP.join(base_dir,filename)):
 			rst_file = open(OP.join(base_dir,filename),"r")
 			parts = publish_parts(rst_file.read(),writer_name='html')
@@ -102,12 +102,13 @@ def render_rst(id = None, category = None):
 if __name__ == "__main__":
 	import cgi
 	form = cgi.FieldStorage()
-	id = form.getfirst("id",None)
+	entry_id = form.getfirst("id",None)
 	category = form.getfirst("cat",None)
 
-	if id and id[-1] == "/":
-		id = id[0:-1]
+	if entry_id and entry_id[-1] == "/":
+		entry_id = entry_id[0:-1]
 	if category and category[-1] == "/":
 		category = category[0:-1]
 
-	render_rst(id,category)
+	render_rst(entry_id,category)
+
