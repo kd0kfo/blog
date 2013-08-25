@@ -1,5 +1,17 @@
 #!/usr/bin/env python
 
+def lookup_val(val):
+	from local_settings import urls
+
+	for id in urls:
+		url = urls[id]
+		unique_name = url.split(".")[0]
+		if unique_name == val:
+			return id
+
+	return None
+
+
 def render_rst(id = None, category = None):
 
 	# Local Settings needs to be written to provide
@@ -12,7 +24,11 @@ def render_rst(id = None, category = None):
 	print('Content-type: text/html\n')
 	if id:
 		if not id.isdigit():
-			id = "0"
+			id_from_val = lookup_val(id)
+			if id_from_val is not None:
+				id = id_from_val
+			else:
+				id = "0"
 		id = int(id)
 		if id > len(local_settings.urls):
 			id = None
@@ -88,5 +104,10 @@ if __name__ == "__main__":
 	form = cgi.FieldStorage()
 	id = form.getfirst("id",None)
 	category = form.getfirst("cat",None)
+
+	if id and id[-1] == "/":
+		id = id[0:-1]
+	if category and category[-1] == "/":
+		category = category[0:-1]
 
 	render_rst(id,category)
