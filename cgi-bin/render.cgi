@@ -66,7 +66,7 @@ def render_rst(entry_id = None, category = None):
 		for i in categories:
 			if category and category != i:
 				continue
-			parts['fragment'] += "<p>%s</p>\n" % i
+			parts['fragment'] += "<p>%s</p>\n" % i.replace(":", " ")
 			parts['fragment'] += "<ul>\n"
 			for entry in categories[i]:
 				basefilename = entry[0]
