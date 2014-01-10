@@ -6,7 +6,7 @@ def lookup_val(val):
 
 	for entry_id in urls:
 		url = urls[entry_id]
-		unique_name = url.split(".")[0]
+		unique_name = ".".join(url.split(".")[:-1])
 		if unique_name == val:
 			return entry_id
 
