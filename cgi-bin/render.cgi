@@ -54,7 +54,7 @@ def render_rst(entry_id = None, category = None):
 			parts = publish_parts(rst_file.read(),writer_name='html')
 		else:
 			parts = publish_parts("File Not Found",writer_name='html')
-		parts['footer'] = "<p>Source: <a href=\"%s\">%s</a></p>\n"  % (OP.join(base_dir,filename),filename)
+		parts['footer'] = "<p>Source: <a href=\"/%s\">%s</a></p>\n"  % (OP.join(base_dir,filename),filename)
 		the_category = util.filename2category(filename)
 		if the_category:
 			parts['footer'] += "Category: <a href=\"/category/{0}\">{0}</a> ".format(the_category)
@@ -69,6 +69,8 @@ def render_rst(entry_id = None, category = None):
 				continue
 			expanded_category_name = ": ".join([word.capitalize() for word in i.split(":")])
 			category_name_path = i.replace(":", "/")
+			if category_name_path and category_name_path[0] != "/":
+				category_name_path = "/%s" % category_name_path
 			parts['fragment'] += "<p>%s</p>\n" % expanded_category_name
 			parts['fragment'] += "<ul>\n"
 			for entry in categories[i]:
@@ -78,7 +80,7 @@ def render_rst(entry_id = None, category = None):
 				if len(basefilename) >= 4 and basefilename[-4:] == ".rst":
 					basefilename = basefilename[:-4]
 				human_readable_name = " ".join([word.capitalize() for word in basefilename.split("_")])
-				parts['fragment'] += "<li><a href=\"/{0}/{1}\">{2}</a></li>\n".format(category_name_path, basefilename, human_readable_name)
+				parts['fragment'] += "<li><a href=\"{0}/{1}\">{2}</a></li>\n".format(category_name_path, basefilename, human_readable_name)
 			parts['fragment'] += "</ul>\n"
 
 	for part in ['head_prefix','html_head','stylesheet','body_prefix','html_title','fragment','footer','body_suffix']:
