@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 def lookup_val(val):
 	from local_settings import urls
 
@@ -56,7 +57,7 @@ def render_rst(entry_id = None, category = None):
 		parts['footer'] = "<p>Source: <a href=\"%s\">%s</a></p>\n"  % (OP.join(base_dir,filename),filename)
 		the_category = util.filename2category(filename)
 		if the_category:
-			parts['footer'] += "Category: <a href=\"render.cgi?cat=%s\">%s</a> " % (the_category,the_category)
+			parts['footer'] += "Category: <a href=\"/category/{0}\">{0}</a> ".format(the_category)
 	else:
 		parts = publish_parts("",writer_name='html')
 		if not category:
@@ -66,7 +67,9 @@ def render_rst(entry_id = None, category = None):
 		for i in categories:
 			if category and category != i:
 				continue
-			parts['fragment'] += "<p>%s</p>\n" % i.replace(":", " ")
+			expanded_category_name = ": ".join([word.capitalize() for word in i.split(":")])
+			category_name_path = i.replace(":", "/")
+			parts['fragment'] += "<p>%s</p>\n" % expanded_category_name
 			parts['fragment'] += "<ul>\n"
 			for entry in categories[i]:
 				basefilename = entry[0]
@@ -74,7 +77,8 @@ def render_rst(entry_id = None, category = None):
 					basefilename = basefilename[basefilename.rfind("/")+1:]
 				if len(basefilename) >= 4 and basefilename[-4:] == ".rst":
 					basefilename = basefilename[:-4]
-				parts['fragment'] += "<li><a href=\"/cgi-bin/render.cgi?id=%s\">%s</a></li>\n" % (entry[1],basefilename)
+				human_readable_name = " ".join([word.capitalize() for word in basefilename.split("_")])
+				parts['fragment'] += "<li><a href=\"/{0}/{1}\">{2}</a></li>\n".format(category_name_path, basefilename, human_readable_name)
 			parts['fragment'] += "</ul>\n"
 
 	for part in ['head_prefix','html_head','stylesheet','body_prefix','html_title','fragment','footer','body_suffix']:
