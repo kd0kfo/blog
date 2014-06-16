@@ -1,0 +1,10 @@
+{"author": "Author's Name",
+ "footer": "<p>Copyright 2012 Author's Name</p>",
+ "title": "Blog Title",
+ "base_url": "http://blog.example.com",
+ "stylesheet": "http://blog.example.com/my.css",
+ "urls": {
+	"0": "index.rst",
+	"1": "test.rst",
+	"2": "category/blog_entry.rst"},
+ "base_dir": ".."}

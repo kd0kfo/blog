@@ -1,4 +1,9 @@
 
+
+def get_config(filename="site.json"):
+    import json
+    return json.load(open(filename, "r"))
+
 def filename2category(filename):
     category = filename.split('/')
     return ":".join(category[:-1])
@@ -32,7 +37,7 @@ class Post(object):
         import os
         import os.path
         import time
-        import local_settings
-        path = os.path.join(local_settings.base_dir, self.filename)
+        local_settings = get_config()
+        path = os.path.join(local_settings['base_dir'], self.filename)
         (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) = os.stat(path)
         return mtime
