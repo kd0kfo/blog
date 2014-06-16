@@ -11,9 +11,9 @@ Install
 
 The python module docutils must be in the python path used by the cgi script, cgi-bin/render.cgi.
 
-Content may be placed in any subdirectory of the top most directory of the blog website. Then, for each blog file, an entry is made in the "urls" dict in the cgi-bin/local_settings.py file. An example is provided in cgi-bin/local_settings.py.example.
+Content may be placed in any subdirectory of the top most directory of the blog website. Then, for each blog file, an entry is made in the "urls" dict in the cgi-bin/site.json file. An example is provided in cgi-bin/site.json.example.
 
-The page can use a custom stylesheet, defined by the variable "stylesheet" in cgi-bin/local_settings.py.
+The page can use a custom stylesheet, defined by the variable "stylesheet" in cgi-bin/site.json.
 
 Requires
 ---------
